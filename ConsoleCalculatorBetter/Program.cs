@@ -36,9 +36,9 @@ namespace ConsoleCalculatorBetter
 
                 WriteLine("\n Please, select one of the following operators or Exit:" +
                     "\n +: Add" +
-                    "\n A: Add all decimals in a array" +
+                    "\n a: Add all decimals in a array" +
                     "\n -: Subtract" +
-                    "\n S: Subtract all decimals in a array" +
+                    "\n s: Subtract all decimals in a array" +
                     "\n *: Multiply" +
                     "\n /: Divide" +
                     "\n 0: Exit calculator" +
@@ -75,6 +75,7 @@ namespace ConsoleCalculatorBetter
                         WriteResult(number1, number2, result, "-");
                         break;
                     case "S":
+                 //        "s":  VARFÖR FUNGERAR EJ DENNA RAD, NÄR OVAN MED A OCH a FUNGERAR OVAN?
                         Clear();
                         result = Subtract(inputArray1);
                         WriteLine("Result for subtract numbers in array = " + result);
@@ -86,7 +87,7 @@ namespace ConsoleCalculatorBetter
                         break;
                     case "/":
                         // Clear();
-                        number2 = NotDivideByZero(number2);
+                        // number2 = NotDivideByZero(number2);
                         result = Divide(number1, number2);
                         WriteResult(number1, number2, result, "/");
                         break;
@@ -148,26 +149,6 @@ namespace ConsoleCalculatorBetter
         }
 
 
-        // This will chek if input is 0 (it is not possible to divide by zero) and if 0, ask for a new number that it will return
-        static double NotDivideByZero(double userInputB)
-        {
-            if (userInputB != 0)
-            {
-                return userInputB;
-            }
-            else
-            {
-                while (userInputB == 0)
-                {
-                    //try 
-
-                    // throw new DivideByZeroException("You can not divide by zero! Enter a new decimal number: ");
-                    userInputB = GetDecimalFromUser();
-                }
-                return userInputB;
-            }
-        }
-
         // This will write the two numbers with the operator between and result. Example 1 + 2 = 3
         static void WriteResult(double userInputA, double userInputB, double result, string aOperator)
         {
@@ -209,10 +190,42 @@ namespace ConsoleCalculatorBetter
             return userInputA * userInputB;
         }
 
+        // This will chek if input is 0 (it is not possible to divide by zero) and if 0, ask for a new number that it will return
+        static double NotDivideByZero(double userInputB)
+        {
+            if (userInputB != 0)
+            {
+                return userInputB;
+            }
+            else
+            {
+                while (userInputB == 0)
+                {
+                    // throw new DivideByZeroException("You can not divide by zero! Enter a new decimal number: ");
+                    userInputB = GetDecimalFromUser();
+                }
+                return userInputB;
+            }
+        }
+
         public static double Divide(double userInputA, double userInputB)
         {
             //Sheck for userInput B != 0
-            userInputB = NotDivideByZero(userInputB);
+            // userInputB = NotDivideByZero(userInputB
+
+           // try
+           // {
+                if (userInputB == 0)
+                {
+                    throw new DivideByZeroException("You can not divide by zero! Enter a new decimal number:");
+                }
+          //  }
+            /*
+            catch (DivideByZeroException)
+            {
+                WriteLine("You can not divide by Zero.");
+            }
+            */
             return userInputA / userInputB;
         }
     }

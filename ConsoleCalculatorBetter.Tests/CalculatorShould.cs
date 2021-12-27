@@ -1,4 +1,5 @@
 using Xunit;
+using System;
 using ConsoleCalculatorBetter;
 
 namespace ConsoleCalculatorBetter.Tests
@@ -63,5 +64,16 @@ namespace ConsoleCalculatorBetter.Tests
             double result = Program.Divide(num1, num2);
             Assert.Equal(expectedResult, result,4);
         }
+        [Fact]
+        public void DivideByZeroTest()
+        {
+            double num1 = 1;
+            double num2 = 0;
+            var expectedResult = Assert.Throws<DivideByZeroException>(
+               () => Program.Divide(num1, num2));
+
+            Assert.Equal("You can not divide by zero! Enter a new decimal number:", expectedResult.Message);
+        }
+
     }
 }
